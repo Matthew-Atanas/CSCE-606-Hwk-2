@@ -1,9 +1,19 @@
+# helped with chatgpt
 class MoviesController < ApplicationController
+  include ApplicationHelper
   before_action :set_movie, only: %i[ show edit update destroy ]
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    #@movies = Movie.all
+
+    update_sorting_session if params[:sort] || params[:direction]
+    @movies = Movie.order("#{sort_column} #{sort_direction}")
+  end
+
+  def update_sorting_session
+    session[:sort] = params[:sort] if params[:sort]
+    session[:direction] = params[:direction] if params[:direction]
   end
 
   # GET /movies/1 or /movies/1.json

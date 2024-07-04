@@ -1,14 +1,44 @@
+<!--helped with chatgpt-->
+
+<meta name="turbo-prefetch" content="false">
+
 <p style="color: green"><%= notice %></p>
+
+<style>
+body {
+  background-color: #dddddd;
+}
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+</style>
 
 <h1>Movies</h1>
 
-<div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
-</div>
+<p>Click on the table header links to sort by them, or to toggle sorting ascending or decending.</p>
+
+<table id="movies">
+  <thead>
+    <tr>
+      <th><%= sortable "title", "Title" %></th>
+      <th><%= sortable "rating", "Rating" %></th>
+      <th><%= sortable "release_date", "Release Date" %></th>
+      <th>Show movie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.rating %></td>
+        <td><%= movie.release_date %></td>
+        <td><%= link_to "Show this movie", movie %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
 
 <%= link_to "New movie", new_movie_path %>

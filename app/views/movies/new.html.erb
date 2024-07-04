@@ -1,3 +1,9 @@
+<style>
+body {
+  background-color: #dddddd;
+}
+</style>
+
 <h1>New movie</h1>
 
 <%= render "form", movie: @movie %>
@@ -5,5 +11,7 @@
 <br>
 
 <div>
-  <%= link_to "Back to movies", movies_path %>
+  <strong>
+    <%= link_to "Back to movies", movies_path %>
+  </strong>
 </div>
