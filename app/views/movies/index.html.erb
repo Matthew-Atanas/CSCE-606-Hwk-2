@@ -13,27 +13,70 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+#title{
+  <%if session[:sort] == "title"%>
+    <%if session[:direction] == "asc"%>
+      background-color: blue;
+    <%else%>
+      background-color: red;
+    <%end%>
+  <%else%>
+    background-color: #dddddd;
+  <%end%>
+}
+#rating{
+  <%if session[:sort] == "rating"%>
+    <%if session[:direction] == "asc"%>
+      background-color: blue;
+    <%else%>
+      background-color: red;
+    <%end%>
+  <%else%>
+    background-color: #dddddd;
+  <%end%>
+}
+#release_date{
+  <%if session[:sort] == "release_date"%>
+    <%if session[:direction] == "asc"%>
+      background-color: blue;
+    <%else%>
+      background-color: red;
+    <%end%>
+  <%else%>
+    background-color: #dddddd;
+  <%end%>
+}
 </style>
 
 <h1>Movies</h1>
 
 <p>Click on the table header links to sort by them, or to toggle sorting ascending or decending.</p>
 
+<p>Current sorting:
+<%= 'Title' if session[:sort] == 'title'%>
+<%= 'Rating' if session[:sort] == 'rating'%>
+<%= 'Release Date' if session[:sort] == 'release_date'%>
+,
+<%= 'Ascending' if session[:direction] == 'asc'%>
+<%= 'Descending' if session[:direction] == 'desc'%>
+</p>
+
+
 <table id="movies">
   <thead>
     <tr>
-      <th><%= sortable "title", "Title" %></th>
-      <th><%= sortable "rating", "Rating" %></th>
-      <th><%= sortable "release_date", "Release Date" %></th>
+      <th id=title><%= sortable "title", "Title" %></th>
+      <th id=rating><%= sortable "rating", "Rating" %></th>
+      <th id=release_date><%= sortable "release_date", "Release Date" %></th>
       <th>Show movie</th>
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.release_date %></td>
+        <td id = title><%= movie.title %></td>
+        <td id=rating><%= movie.rating %></td>
+        <td id=release_date>><%= movie.release_date %></td>
         <td><%= link_to "Show this movie", movie %></td>
       </tr>
     <% end %>
